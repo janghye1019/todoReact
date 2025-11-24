@@ -1,0 +1,53 @@
+//1124 로컬스토리지 /
+/ 웹브라우저에 데이터를 저장하는 공간 > 브라우저를 닫아도 데이터를 유지 > 용량제한이 있어요
+임시저장해주는 캐시..?
+
+//1124 함수배열 변경 로컬스토리지
+  const [todos, setTodos] = useState(() => {
+    //로컬스토리지에 아이템이 저장됐는지 가져와서 확인하기
+    const saved = localStorag.getItem("todos");
+
+    //있으면 어뜨게 하고 없으면 어뜨케한다 
+    if(saved){
+      return JSON.parse(saved)
+    }
+
+    //로컬스토리지는 문자열 밖에 인식을 못해서 
+
+    파싱: 처리한다. 파스라고 쓴다 
+
+
+
+    **stringify(스트링파이)**는 이런 복잡한 것들을
+👉 사람이 읽을 수 있는 “문자(글자)”로 바꿔주는 도구야.
+
+
+
+//1124 함수배열 변경 로컬스토리지
+  const [todos, setTodos] = useState(() => {
+    //로컬스토리지에 아이템이 저장됐는지 가져와서 확인하기
+    const saved = localStorage.getItem("todos");
+
+    //있으면 내용을 가져오는데 제이슨형식으로 파싱한다.
+    //제이슨 JSON:  문자열을 다시 객체 또는 배열로 변환해서 반환
+    if (saved) {
+      return JSON.parse(saved)
+    }
+    //값이 없으면 빈 배열로 반환
+    return [];
+  });
+
+
+  // 원래 배열/객체를 문자열로 바꿔서 저장한다. :  투드즈가 상태가 바뀔 떄 마다 로컬스토리지에 문자열로 저장이 되는 (언어)..?
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos]);
+
+  //무조건 원본은 그대로 두고, 변형하기
+  // function addTodo(newTodo) {
+  //   setTodos([...todos, newTodo])
+  // }
+
+
+배포 테트리파이에 올리기
+깃허브랑 연동해서 네트리파이에 배포
