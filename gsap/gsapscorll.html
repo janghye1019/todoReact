@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤 효과</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .text-wrapper {
+            /* color: rgb(255, 33, 170); */
+            font-size: 72px;
+            font-weight: 600;
+            margin: 1200px 0;
+        }
+
+        .text-wrapper span {
+            /* firefox용 */
+            color: rgba(255, 255, 255, 0.212);
+
+            /* 크롬, 사파리, 엣지용 */
+            -webkit-text-fill-color: rgba(255, 255, 255, 0.178);
+            -webkit-background-clip: text;
+            /* 배경 범위를 어디까지 보여줄껀지 */
+            background-image: linear-gradient(#fff, #fff);
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="text-wrapper">
+        <div class="mask">
+            <span class="text">Lorem ipsum dolor sit amet consectetur<br> adipisicing elit. Tenetur deserunt nobis
+                maxime<br>
+                dolores a ab iste veniam, iure magni, voluptate in sed, pariatur ducimus! Ea consequuntur ipsam laborum
+                impedit aliquid?<br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur deserunt nobis
+                maxime<br>
+                dolores a ab iste veniam, iure magni, voluptate in sed, pariatur ducimus! Ea consequuntur<br> ipsam
+                laborum
+                impedit aliquid?<br></span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.fromTo('.text-wrapper .text',
+            {
+                'background-size': '0% 100%',
+            },
+            {
+                'background-size': '100% 100%',
+
+                scrollTrigger: {
+                    trigger: '.text-wrapper',//누구 기준으로 
+                    pinnedContainer: '.text-wrapper',
+                    //요소(text)가 고정 될때 기준이 되는 부모요소 
+
+                    start: '0 40%', //애니메이션 시작지점
+                    end: '100% 20%',//애니메이션 끝나는 지점
+                    markers: true,
+                    scrub: 20//스크롤과 애니메이션을 연결하는 속성
+                }
+            }
+        )
+    </script>
+</body>
+
+</html>

@@ -9,11 +9,15 @@ import { createRoot } from 'react-dom/client'
 
 
 // hook 
-import Effect from './hook/useEffect'
-import Ref from './hook/useRef'
-import Context from './hook/useContext/Main'
+// import Effect from './hook/useEffect'
+// import Ref from './hook/useRef'
+// import Context from './hook/useContext/Main'
+// import UseMemo from './hook/useMemo'
+// import useCounter from './hook/customhook/customHook'
+import CustomHook from './hook/customhook/customHook'
 
-import UseMemo from './hook/useMemo'
+import './App.css'
+
 
 // const router = createBrowserRouter([
 //   {
@@ -41,7 +45,8 @@ import UseMemo from './hook/useMemo'
 // ])
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
+  <>
     {/* <App /> */}
     {/* <RouterProvider router={router}></RouterProvider> */}
 
@@ -49,7 +54,10 @@ createRoot(document.getElementById('root')).render(
     {/* <Effect /> */}
     {/* <Ref /> */}
     {/* <Context /> */}
-    <UseMemo />
+    {/* <UseMemo /> */}
+    {/* <useCounter /> */}
+    <CustomHook />
+    {/* </StrictMode>, */}
 
-  </StrictMode>,
+  </>
 )
