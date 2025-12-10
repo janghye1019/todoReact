@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 유형</title>
+    <link rel="stylesheet" href="./styleCard.css">
+</head>
+
+<body>
+    <section class="sec01">
+        <div class="text-wrap">
+            <h2>HERO 영역</h2>
+            <p>HERO 영역입니다.</p>
+        </div>
+    </section>
+
+    <section class="sec02">
+        <div class="text-wrap">
+            <h2>CONTENT 영역</h2>
+        </div>
+        <ul class="card-list">
+            <li>
+                <div class="card">
+                    <img src="images/img01.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img02.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img03.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img04.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img05.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img06.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img03.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img01.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img04.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="card">
+                    <img src="images/img02.jpg" alt="">
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="sec03">
+        <div class="text-wrap">
+            <h2>CONTACT 영역</h2>
+            <p>문의 영역입니다.</p>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        //홀수카드
+        let cardsOdd = gsap.utils.toArray('.card-list li:nth-child(odd)');
+        //짝수카드
+        let cardsEven = gsap.utils.toArray('.card-list li:nth-child(even)');
+
+        // gsap.to(cards, {
+        //카드리스트이 리스트의 너비가 100% 가정했을때, 카드 너비의 900%만큼 왼쪽으로 이동
+        // 총10개일 경우 9개의 분량만큼만 왼쪽으로 이동을 한다. (카드길이 -1을 했으니까)
+        // xPercent: 100 * (cards.length - 1),
+
+        // ease: 'none',//일정한 속도로 이동을 해요 all ease in out 의 ease
+
+        // scrollTrigger: {
+        // trigger: 'sec02',
+        // 고정 : sec02는 고정되고, 그 안에서 카드만 이동이 된다.
+        // pin: true,
+        //스크럽: 스크롤 부드러운 크기 : 스타트셋팅 : markers,start 작성 ,   
+        // scrud: 1, (true로 적용해도됌)
+        // markers: true,
+        // start: 'center center',
+        // }
+        // });
+        // -----------------------------------------
+        gsap.registerPlugin(ScrollTrigger);
+
+        // gsap.utils.toArray()
+
+        let cards = gsap.utils.toArray('.card-list li');
+
+        gsap.to(cards, {
+            xPercent: -100 * (cards.length - 1),
+            //card-list li 의 너비가 100% 라고 가정 했을 때, 카드 너비의 900%만큼 왼쪽으로 이동 (카드가 10개임). 즉 카드의 9개 분량만큼 왼쪽으로!
+            ease: 'none', //일정한 속도로 이동
+
+            scrollTrigger: {
+                trigger: '.sec02',
+                pin: true, //.sec02는 고정되고, 그 안에서 카드만 이동되게 함
+                scrub: 1,
+                markers: true,
+                start: 'center center'
+
+            }
+        })
+
+        gsap.to(cardsOdd, {
+            rotation: 10,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: 'sec02',
+                scrud: 1,
+                markers: true,
+                start: 'center center',
+            }
+
+        });
+
+        gsap.to(cardsOdd, {
+            rotation: -10,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: 'sec02',
+                scrud: 1,
+                markers: true,
+                start: 'center center',
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

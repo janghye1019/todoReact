@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토글 액션</title>
+    <!-- <link rel="stylesheet" href="./gsapToggle.html"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .sec {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .sec01 {
+            background-color: pink;
+        }
+
+        .sec02 {
+            background-color: blueviolet;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: brown;
+            font-size: 50px;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sec sec01">
+
+    </div>
+    <div class="sec sec02">
+        <div class="box">box</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script>
+        // 스크롤 트리거 가져오기
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to('.box', {
+            x: 1200,
+            duration: 10,
+
+            scrollTrigger: {
+                trigger: '.box',
+                start: 'top 70%',
+                end: 'top 30%',
+                markers: true,
+                toggleClass: 'red',
+
+                // toggleAction :스크롤할떄 애니메이션을 언제,어떻게 실행할지 설정해주는 것, 재생버튼 같은 소재
+
+                // toggleAction: 'plat none none none'
+                // 기본값 : 한번 재생만 한다
+                // onEnter: scroller start 선을 통과해서 들어올 떄
+                // onLeave: scroller-end 를 벗어날 때 
+                // onEnterBack: scroller-end 선을 통과했다 다시 들어올때
+                // onLeaveBack: scroller-start 선을 다시 나갈때
+
+                // ex
+                // toggleAcrions: 'restart none none none'
+                //들어올때마다 처음부터 다시 실행
+
+                // toggleAcrions: 'restart reverse none none'
+                //들어올때마다 처음부터 다시 재생, 나갈 때는 되감기
+
+                // toggleAcrions: 'restart pause resume none'
+                //들어오면 재생, 나가면 일시정지, 다시 들어오면 이어 재생
+                // toggleAcrions: 'restart pause resume reset'
+                // 나가면 처음 상태로 리셋
+                // toggleAcrions: 'restart pause resume complete'
+                // 나가면 끝상태로 바로 이동
+
+                // play : 재생하기 pause: 일시정지 resume:이어서 재생
+                // reverse : 거꾸로 restrat: c처움부터 다시 , reset: 처음상태로 돌아가기 complete : 끝 상태로 바로 이동
+                // none 아무 동작이 없음
+
+                // scrud:; > 토글액션에서 스크럽은 필요하지 않다~~~~!!!!!
+
+                // 어떤 영역에 진입했을 때 시용하고 싶은 경우에 많이 사용한다
+
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>
