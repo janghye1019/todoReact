@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤</title>
+
+<!-- css 에서 작동시키는거랑 똑같아용 -->
+
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: #000;
+    }
+    .content {
+        width: 100%;
+        height: 100vh;
+    }
+    h2 {
+        color: #fff;
+        text-align: center;
+        font-size: 60px;
+        position: sticky;
+        /* gsap는 트랜스폼으로 움직이기라서 위에서 밀어줘야함 */
+        top: 40vh;
+    }
+
+</style>
+<body>
+
+    <section>
+        <div class="content">
+            <h2>첫번째 영역</h2>
+        </div>
+        <div class="content">
+            <h2>두번째 영역</h2>
+        </div>
+        <div class="content">
+            <h2>세번째 영역</h2>
+        </div>
+    </section>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        let contents = document.querySelectorAll('.content');
+        // el,tl : 파라미터 엘리멘트 약자
+        contents.forEach(el => {
+
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: el, //현재 content 요소를 기준으로 잡음
+                    // 아래에서 위로 올라와야
+                    start: 'bottom 70%',//bottom에서부터 30% 떨어진 영역에서 시작한다
+                    end: 'bottom center',// 가운데 오면 아에 안보이게 설정한다.
+                    markers: true, 
+                    scrub: 2
+                }
+            });
+
+            tl.to(el, {
+                opacity: 0,
+                yPercent: -10, //-10% 이동
+            })
+        });
+
+    </script>
+
+</body>
+</html>

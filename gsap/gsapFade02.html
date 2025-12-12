@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤02+fade</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* 스크롤 되게 만들기 */
+        section{
+            position: relative;
+            height: 300vh;
+            width: 100%;
+        }
+
+        .content-wrapper{
+            /* 고정을 해줘야해 */
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        .content{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content h2{
+            font-size: 50px;
+        }
+
+        .content01{background-color: rgb(206, 192, 255);}
+        .content02{
+            background-color: purple;
+            opacity: 0;
+        }
+        .content03{
+            background-color: rgb(63, 108, 205);
+            opacity: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <section>
+        <div class="content-wrapper">
+            <div class="content content01">
+                <h2>첫번쩨
+                </h2>
+            </div>
+            <div class="content content02">
+                <h2>두번쩨
+                </h2>
+            </div>
+            <div class="content content03">
+                <h2>세번쩨
+                </h2>
+            </div>
+        </div>
+    </section>
+
+     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script>
+         gsap.registerPlugin(ScrollTrigger);
+        // 초기화 셋팅을 해줘야 움직임
+        gsap.set('.content02 h2',{yPercent:100,opacity:0});
+        gsap.set('.content03 h2',{yPercent:100,opacity:0});
+         
+        const tl = gsap.timeline({
+            scrollTrigger:{
+                trigger: 'section',
+                markers: true,
+                start: 'top top', //secrion 화면 상단에  
+                end: 'bottom bottom', // section 끝까지 스크롤 되면 끝
+                scrub: 1
+            }
+         });
+         // 위로 움직이면서 사라지게 하기
+         tl
+        .to('.content01',{opacity: 0,duration: 1,})
+        .to('.content01 h2',{opacity:0, yPercent: -100},'<')
+        .to('.content02',{opacity:1,duration:1,},'<')
+        // 보여지면서 원래 자리로 가야죵 (100% ~ 0 으로 움직임)!
+        .to('.content02 h2',{opacity:1, yPercent: 0},'<')
+        
+        // --------------------------------------------------
+
+        .to('.content02',{opacity: 0, duration: 1, })
+            .to('.content02 h2',{opacity:0, yPercent: -100},'<')
+
+        .to('.content03',{ opacity:1,duration:1,},'<')
+        .to('.content03 h2',{opacity:1, yPercent: 0},'<')
+        
+    </script>
+</body>
+</html>

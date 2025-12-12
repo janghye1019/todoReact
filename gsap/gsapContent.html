@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contents page들</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sec01 {
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sec03 {
+    width: 100%;
+    height: 50vh;
+    background-color: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+}
+.container > div {
+    width: calc((100% - 5%) / 2);
+}
+.img-container {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+.img-wrap {
+    height: 80vh;
+    margin: 10vh 0;
+    position: relative;
+}
+.img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.img01{
+    background-image: url(./images/mig1.jpg);
+    z-index: 4;
+}
+.img02{
+    
+    background-image: url(./images/img2.jpg);
+    z-index: 3;
+}
+.img03{
+    background-image: url(./images/img3.png);
+    z-index: 2;
+}
+.img04{
+    background-image: url(./images/img4.jpg);
+    z-index: 1;
+}
+.panel-txt{
+    width: 100;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 10vh 0;
+    /* gsap를 위한 설정 */
+    opacity: 0;
+}
+.panel-txt.text01{
+    opacity: 1;
+}
+
+
+.text-inner{
+    width: 100%;
+    height: 100vh;
+}
+      
+    </style>
+</head>
+<body>
+    <section class="sec sec01">
+        <h2>첫번째영역</h2>
+    </section>
+<!-- 하나씩 따로 작동할 때, 글 , 그림 영역으로 나눠서 쓴다. -->
+    <section class="sec sec02">
+        <div class="container">
+            <div class="text-wrap">
+                <div class="panel-txt text01">
+                    <div class="text-inner">
+                        <h2>타이틀영역</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem in provident quam eos temporibus ea soluta dicta omnis velit neque, vero hic natus a tempore ab sint nobis nostrum facere?</p>
+                    </div>
+                </div>
+                <div class="panel-txt text02">
+                    <div class="text-inner">
+                        <h2>타이틀영역</h2>
+                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem in provident quam eos temporibus ea soluta dicta omnis velit neque, vero hic natus a tempore ab sint nobis nostrum facere?</p>
+                    </div>
+                </div>
+                <div class="panel-txt text03">
+                    <div class="text-inner">
+                        <h2>타이틀영역</h2>
+                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br>
+                            Autem in provident quam eos temporibus ea soluta dicta omnis velit neque,<br>
+                             vero hic natus a tempore ab sint nobis nostrum facere?</p>
+                    </div>
+                </div>
+                <div class="panel-txt text04">
+                    <div class="text-inner">      
+                        <h2>타이틀영역</h2>
+                       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem in provident quam eos temporibus ea soluta dicta omnis velit neque, vero hic natus a tempore ab sint nobis nostrum facere?<br>
+                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis alias omnis eveniet cupiditate ex molestiae minus non incidunt eius quod magni, totam porro cumque cum repellendus, nemo quae tempora explicabo!
+                       </p>
+                    </div>
+                </div>
+            </div>
+            <div class="img-container">
+
+                <div class="img-wrap">
+                    <div class="img img01"></div>
+                    <div class="img img02"></div>
+                    <div class="img img03"></div>
+                    <div class="img img04"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="sec sec03">
+        <h2>마지막영역</h2>
+    </section>
+
+
+       <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
+    <script>
+
+        //  이해하면서 다시 작성해보기 
+        gsap.registerPlugin(ScrollTrigger);
+
+      // 첫번째 텍스트 영역 
+        gsap.to(".text01", {
+            opacity: 0,
+            scrollTrigger: {
+                trigger: '.text01',
+                // markers: true,
+                start:'center 40%',
+                end: '60% 20%',
+                scrub: true,
+            }
+        });
+
+        // 첫번째 이미지 
+        gsap.to('.img01', {
+            height: 0,
+            scrollTrigger: {
+                trigger: '.text01',
+                // markers: true,
+                scrub: true,
+                start: 'top -10%',
+                end: 'bottom 10%'
+            }
+        });
+
+
+         // 두번째 텍스트 영역 (아래서 위로 올라갈 때. 즉 나타날 때)
+        gsap.fromTo('.text02', 
+        {opacity: 0},
+        {
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.text02',
+                // markers: true,
+                start: '40% 80%',
+                end: 'center center',
+                scrub: true,
+            }
+        });
+              // 두번째 영역이 사라질 때 
+        gsap.fromTo('.text02', 
+            {opacity: 1},
+            {
+                opacity: 0,
+                immediateRender: false,  
+                //충돌 방지. 스크롤 해서 해당 구간에 도착할 때까지 기다림
+                scrollTrigger: {
+                trigger: '.text02',
+                // markers: true,
+                start:'center 40%',
+                end: '60% 20%',
+                scrub: true,
+            }
+        });
+
+        // 두번째 이미지 
+        gsap.to('.img02', {
+            height: 0,
+            scrollTrigger: {
+                trigger: '.text02',
+                // markers: true,
+                scrub: true,
+                start: 'top -10%',
+                end: 'bottom 10%'
+            }
+        });
+
+        // -------3,번째 반복해서 사용하면 됌
+         // 세번째 텍스트 영역 (아래서 위로 올라갈 때. 즉 나타날 때)
+        gsap.fromTo('.text03', 
+        {opacity: 0},
+        {
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.text03',
+                // markers: true,
+                start: '40% 80%',
+                end: 'center center',
+                scrub: true,
+            }
+        });
+
+        // 세번째 영역이 사라질 때 
+        gsap.fromTo('.text03', 
+            {opacity: 1},
+            {
+                opacity: 0,
+                immediateRender: false,  
+                //충돌 방지. 스크롤 해서 해당 구간에 도착할 때까지 기다림
+                scrollTrigger: {
+                trigger: '.text03',
+                // markers: true,
+                start:'center 40%',
+                end: '60% 20%',
+                scrub: true,
+            }
+        });
+
+             // 세번째 이미지 
+        gsap.to('.img03', {
+            height: 0,
+            scrollTrigger: {
+                trigger: '.text03',
+                markers: true,
+                scrub: true,
+                start: 'top -10%',
+                end: 'bottom 10%'
+            }
+        });
+        // 4번째는 나타날때만 넣어주기
+         // 네번째 텍스트 영역 (아래서 위로 올라갈 때. 즉 나타날 때)
+        gsap.fromTo('.text04', 
+        {opacity: 0},
+        {
+            opacity: 1,
+            scrollTrigger: {
+                trigger: '.text04',
+                // markers: true,
+                start: '40% 80%',
+                end: 'center center',
+                scrub: true,
+            }
+        });
+
+        // 이미지는 하나씩 걷어짐
+        // 텍스트 영역 먼저 작성하고, 이미지 영역 작성하기
+        
+        
+    </script>
+    
+</body>
+</html>
